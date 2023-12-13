@@ -1,5 +1,6 @@
 import { StyleSheet, FlatList, Text, View } from 'react-native';
 import React from 'react';
+import { Colors } from '../../../Constants/Color';
 
 const CustomFlatList = ({ data, keyExtractor, renderItem,fallbackText, ...props }) => {
   if (Array.isArray(data) && data.length > 0)
@@ -29,5 +30,7 @@ const styles = StyleSheet.create({
   },
   fallbackText: {
     fontSize: 16,
+    color: Colors.primary200
   },
+
 });
