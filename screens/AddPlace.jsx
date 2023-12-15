@@ -4,12 +4,16 @@ import PlaceForm from '../components/Places/PlaceForm'
 
 const AddPlace = () => {
   return (
-    <View>
+    <View style={styles.formContainer}>
       <PlaceForm />
-    </View>
+     </View>
   )
 }
 
 export default AddPlace
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  formContainer:{
+    flex: 1
+  }
+})
