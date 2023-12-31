@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,10 +8,25 @@ import AddPlace from './screens/AddPlace';
 import IconButton from './components/UI/IconButton';
 import { Colors } from './constants/colors';
 import Map from './screens/Map';
+import { init } from './util/database';
+import AppLoading from 'expo-app-loading'
+import PlaceDetails from './screens/PlaceDetails';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [isDBInitialize, setIsDBInitialize] = useState(false);
+  useEffect(() => {
+    init().then(()=>{
+      setIsDBInitialize(true);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }, []);
+
+  if(!isDBInitialize){
+    return <AppLoading />
+  }
   return (
     <>
       <StatusBar style="dark" />
@@ -45,6 +61,9 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Map" component={Map} />
+          <Stack.Screen name="PlaceDetails" component={PlaceDetails} options={{
+            title:"Loading Title"
+          }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>
